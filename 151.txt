@@ -1,0 +1,28 @@
+public class Solution {
+    public String reverseWords(String s) {
+        if(s==null) return null;
+        String ss=new String();
+        ss=s.trim();
+        if(ss=="") return "";
+        int len=ss.length();
+        StringBuilder s1=new StringBuilder();
+        StringBuilder s2=new StringBuilder();
+        for(int i=len-1;i>=0;i--){
+            if(ss.charAt(i)!=' ') {
+                s1.append(ss.charAt(i));
+                if(i==0){
+                    s1.reverse();
+                    s2.append(s1);
+                }
+            }
+            else if(i>0&&ss.charAt(i)==' '&&ss.charAt(i-1)!=' ') {
+                s1.reverse();
+                s2.append(s1);
+                s2.append(' ');
+                s1.delete(0,s1.length());
+            }
+        }
+        return s2.toString();
+        
+    }
+}
