@@ -1,0 +1,21 @@
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<List<Integer>> re=new ArrayList<List<Integer>>();
+        List<Integer> list1=new ArrayList<Integer>();
+        list1.add(1);
+        if(rowIndex==0) return list1;
+        re.add(list1);
+        for(int i=1;i<=rowIndex;i++){
+            List<Integer> list2=new ArrayList<Integer>();
+            list2.add(1);
+            List<Integer> pre=new ArrayList<Integer>();
+            pre=re.get(re.size()-1);
+            for(int j=0;j<i-1;j++){
+                list2.add(pre.get(j)+pre.get(j+1));
+            }
+            list2.add(1);
+            re.add(list2);
+        }
+        return re.get(re.size()-1);
+    }
+}
