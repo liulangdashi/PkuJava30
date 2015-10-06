@@ -1,0 +1,75 @@
+public class Solution {
+    public int myAtoi(String str) {
+        int max = 0x7fffffff;  
+        int min = 0x80000000;  
+        int num = 0;
+        long count = 0;
+        int flag = 0;	//1表示正数，-1表示负数
+//        if(str.contains(" "))
+//            str = str.replaceAll(" ", "");
+        if(str.equals("") || str == null){
+        	return 0;
+        }
+//        if(str.startsWith("+")){
+//        	flag = 1;
+//        	str = str.replaceFirst("\\+", "");
+//        }
+//        else if(str.startsWith("-")){
+//        	flag = -1;
+//        	str = str.replaceFirst("-", "");
+//        }
+//        if(str.startsWith("+") || str.startsWith("-")){
+//        	return 0;
+//        }
+        while(str != null && str != "" && (str.charAt(0) <'0' || str.charAt(0) > '9')){
+        	if(str.charAt(0) == ' ' && flag == 0)
+        		str = str.replaceFirst(" ", "");
+        	else if(str.charAt(0) == '+'){
+        		if(flag == 0){
+        			flag = 1;
+        			str = str.replaceFirst("\\+", "");
+        		}
+        		else
+        			return 0;
+        	}
+        	else if(str.charAt(0) == '-'){
+        		if(flag == 0){
+        			flag = -1;
+        			str = str.replaceFirst("-", "");
+        		}
+        		else
+        			return 0;
+        	}
+        	else 
+        		return 0;
+        }
+        if(flag == 0)
+            flag = 1;
+        for(int i = 0; i < str.length(); i++){
+        	if(str.charAt(i) <= '9' && str.charAt(i) >= '0'){
+        		count = count*10 + (str.charAt(i) - '0');
+        		if (count > max){   //溢出处理  
+        			 if(flag == 1)
+        	                return max;
+        	            else
+        	                return min;
+        		}
+        	}
+        	else
+        		break;
+        }
+        // if(flag == 0)
+        // 	flag = 1;
+        // if(count < 0){
+        //     if(flag == 1)
+        //         return max;
+        //     else
+        //         return min;
+        // }
+        count *= flag;
+        // if (count > max || count < min)   //溢出处理  
+        //     return count > 0 ? max : min;  
+        num = (int)count;
+        return num;
+    }
+}
